@@ -31,6 +31,7 @@ def aliens (F, n):
     
     F[n] = F[n-1] + F[n-2]
     return F[n]
+
 def aliens2(F,n):
     """
     
@@ -52,7 +53,7 @@ def aliens2(F,n):
         print(' F is not long enough')
         return(0)
     
-    F.append[F[n-1] + F[n-2]]
+    F.append(F[n-1] + F[n-2])
     return F
 
 if __name__ == "__main__":
@@ -63,25 +64,22 @@ if __name__ == "__main__":
     F[0] = 0
     F[1] = 1
     
-    for n in range(2, 20):
+    for n in range(2, 19):
         F[n] = aliens(F, n)
 
-    intF = [int(x) for x in F[:20]]
+    intF = [int(x) for x in F[:19]]
     print(intF)
     ## now use a list
     
     F = intF
     d = []
     
-    for n in range(2,19):
+    for n in range(2, 19):
         d.append(F[n]/F[n-1])
-        
         print (d)
-        
-        ## to finish this, comput d[n] = F[n+1]/F[n] for n = 1, 2, ... 20
-        
-        d = F
         plt.plot(d,'.')
-        
-        
+        plt.title('golden')
+        plt.xlabel('ratio numbers')
+        plt.ylabel('golden ratio')
+        plt.grid()
 
