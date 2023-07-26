@@ -26,7 +26,7 @@ def MCint(f, a, b, n):
     """
     from random import random
     
-    maxF = .5
+    maxF = 2
     
     area = 0
     saveX = []
