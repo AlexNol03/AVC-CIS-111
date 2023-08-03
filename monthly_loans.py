@@ -4,153 +4,144 @@ Created on Wed Aug  2  1:53:27 2023
 
 @author: Alex Nolan
 """
-
+# putting """ after def and hitting enter gives you parameters
 def computesPmt(PV, r, n):
     """
 
+
     Parameters
     ----------
-    PV : TYPE float 
-    DESCRIPTION. present value (amt borrow)
-    r : TYPE
+    Pv : TYPE float
+        DESCRIPTION. present value (amt you borrow)
+    r : TYPE float
         DESCRIPTION. interest rate APR
     n : TYPE integer
         DESCRIPTION. number of months to pay back loan
 
     Returns
     -------
-    Pmt : TYPE
-        DESCRIPTION. amt apid per month 
-    
+    Pmt : TYPE float
+        DESCRIPTION. amt paid per month
+
     """
-    r =r/100 #convert APR to a decimal
+    r = r/100 # convert apr to decimal
     r = r/12
     
-    Pmt = r * PV/(1-(1+r)**-n)
-    return Pmt    
-    
-   
+    Pmt =  r * PV/(1-(1+r)**-n)
+    return Pmt
+
 def computesPV(Pmt, r, n):
     """
-    compute how much $$ you can borrow
+compute how much money you can borrow
     Parameters
     ----------
     Pmt : TYPE float
-        DESCRIPTION. how much I can afford to for monthly payment
-    r : TYPEfloat
-        DESCRIPTION. interest rate APR
-    n : TYPE integegr
-        DESCRIPTION. number of months
+        DESCRIPTION. how much i can afford monthly
+    r : TYPE
+        DESCRIPTION.
+    n : TYPE
+        DESCRIPTION.
 
     Returns
     -------
-    PV : float
-    DESCRIPTION. amount of $$ I can afford to borrow
-    
-    formula:
-        Pv = (1-(1+r)**(-n) *Pmt/r
+    None.
+    """
+    r = r/100 # convert apr to decimal
+    r = r/12
 
+    Pv = (1-(1+r)**(-n)) * Pmt / r
+    return Pv
+
+def computesN(Pmt,Pv,r):
     """
     
-    r = r/100 #convert APR to decimal
-    r= r/12
-    
-    PV = (1-(1+r)**(-n)) * Pmt / r
-    return PV
-def computesN(Pmt, PV, r):
-    
-    
-    """
-    Pmt = r * PV/(1-(1+r)**-n)
-    Pmt is how much you pay back/mo 
-    r is interest rate per month
-    n is number of months
 
     Parameters
     ----------
-    Pmt : TYPE flaot
-        DESCRIPTION. monthly payment
-    PV : TYPE float
-        DESCRIPTION. amount borrowed
-    r : TYPE float
-        DESCRIPTION. interest rate, APR
+    pmt : TYPE FLOAT
+        DESCRIPTION. MONTHLY PAYMENT
+    Pv : TYPE FLOATAMT BORROWED
+        DESCRIPTION.
+    R : TYPE FLOAT
+        DESCRIPTION.INTEREST RATE APR
 
     Returns
     -------
-    N : TYPE integer
-        DESCRIPTION. Number of months to pay back loan
+    n: TYPE INTEGER
+    DESCRIPTION: NUMBER OF MONTHS TO PAY BACK LOAN
 
     """
     import numpy as np
-    # convert r (APR) to a decimal, per month
+    #convert r (APR) to a decimal, per month
     r = r/12 # converts to % per month
-    r = r/100 # converts % to a decimal
+    r = r/100 # converts % to decimal 
     
-    # given Pmt, Pv, r, we compute n
+    #given Pmt, Pv, r, we compute n
     
-    n = -np.log( 1-PV*r/pmt) / np.log(1+r)
-    n = round(n,1)
+    n = -np.log( 1-Pv*r/Pmt) / np.log(1+r)
+    n= round(n,1)
     
     return n
-    
-if __name__ == "__main__":
-        
-        import numpy as np
 
-while(True):
-    choice = int(input('enter choice 2 for PV, 1 for Pmt, 3 for n -> '))
-    if (choice == 1 or choice ==2 or choice == 3): 
-        break
-    else:
-        print(f"enter a 1 or a 2, or a 3 you entered {choice}\n")
+if __name__ == "__main__":                                     
+                                
+    import numpy as np
+
+    while(True):
+        choice = int(input("enter 1 for Pmt, 2 for PV, 3 for number of months to pay off loan  ->  "))
+        if (choice ==1 or choice == 2 or choice == 3):
+            break
+        else:
+            print(f"enter a 1, 2, or a 3, you entered {choice}")
         
+
 if choice == 1:
-    #compute pmt; input PV, r, n
-    n = 48
-    PV = input('enter PV:')
-    PV = float(PV) 
-    # equivalently PV = float(input('enter PV: '))
-    print(f"PV ={PV} \n")
+    PV = input("enter PV: ")
+    PV = float(PV)
+    # equivalently PV = float(input("enter Pv: "))
+    # \n creates a new line underneath
+    print(f"PV = {PV} \n")
     
-    r = input("interest APR:")
-    r = float(r)
+    r = float(input("interest (apr): "))
+    #  putting a : and 0.2 makes it round to two decimal places. ends in f
+    print(f"interest rate = {r: 0.3f} \n")
     
-    print(f"interest = {r: 0.3f}\n")
+    n = int(input('how many months:  '))
+    print(f"\nn = {n} months\n")
     
-    n= int(input('how many months:'))
-    print(f"\nn = {n} months \n")
-
     pmt = computesPmt(PV, r, n)
     pmt = np.round(pmt, 2)
-    print(f"payment is {pmt: } per month\n")
-
+    print(f"payment is {pmt: } per month")
+    
 if choice == 2:
-    #compute PV, input pmt, r, n
-    pmt= input('enter pmt: ')
-    pmt = float(pmt)
-    #equivalently PV = float (input('enter PV: '))
-    print(f"pmt = {pmt: 0.2f} \n")
     
-    r= input('interest APR: ')
-    r = float(r)
-    n = input("enter number of months ")
-    n = int(n)
+    Pmt = input('enter Pmt: ')
+    Pmt = float(Pmt)
+    print(f"Pmt = {Pmt} \n")
     
-    print (f"\nn = {n} months \n")
+    r = float(input("interest (apr): "))
+    #  putting a : and 0.2 makes it round to two decimal places. ends in f
+    print(f"interest rate = {r: 0.3f} \n")
     
-    PV = computesPV(pmt, r, n)
-    #PV = np.round(pmt,2)
-    print(f"amount I can borrow is ${PV: 0.2f}")
-
+    n = int(input('how many months:  '))
+    print(f"\nn = {n} months\n")
+   
+    PV = computesPV(Pmt, r, n)
+    PV = np.round(PV, )
+    print(f"amt I can borrow (present value) is: {PV: }")
+    
 if choice == 3:
-    #compute PV, input pmt, r, n
-    PV = input('enter PV: ')
+
+    Pmt = input('enter Pmt: ')
+    Pmt = float(Pmt)
+    print(f"Pmt = {Pmt} \n")
+    
+    PV = input("enter PV: ")
     PV = float(PV)
-    pmt = input('enter pmt: ')
-    pmt = float(pmt)
+    print(f"PV = {PV} \n")
     
-    r= input('interest APR: ')
-    r = float(r)
-    n = computesN(pmt, PV, r)
-    
-    print(f"\nn = {n} months \n")
+    r = float(input("interest (apr): "))
+    print(f"interest rate = {r: 0.3f} \n")
+    MonthsMakingPayment = computesN(Pmt,PV,r)
+    MonthsMakingPayment = np.round(MonthsMakingPayment, 2)
+    print(f"loan will be paid off in {MonthsMakingPayment} months")
